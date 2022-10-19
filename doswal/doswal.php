@@ -50,7 +50,7 @@ else{
         </div>
         <ul class="nav-list">
 
-            <li>
+        <li>
                 <a href="doswal.php">
                     <i class='bx bx-grid-alt' id="icon"></i>
                     <span class="links_name">Home</span>
@@ -58,18 +58,25 @@ else{
                 <span class="tooltip">Home</span>
             </li>
             <li>
-                <a href="datamhs.php">
-                    <i class='bx bx-pie-chart-alt-2' id="icon"></i>
-                    <span class="links_name">Lihat Data <br>Mahasiswa</span>
+                <a href="editdosen.php">
+                    <i class='bx bx-user' id="icon"></i>
+                    <span class="links_name">Edit Data Dosen</span>
                 </a>
-                <span class="tooltip">Lihat DataMahasiswa</span>
+                <span class="tooltip">Edit Data Dosen</span>
             </li>
             <li>
-                <a href="mhspkl.php">
+                <a href="verifMhs.php">
                     <i class='bx bx-chat' id="icon"></i>
                     <span class="links_name">Verifikasi <br>Mahasiswa</span>
                 </a>
                 <span class="tooltip">Verifikasi Mahasiswa</span>
+            </li>
+            <li>
+                <a href="datamhs.php">
+                    <i class='bx bx-pie-chart-alt-2' id="icon"></i>
+                    <span class="links_name">Lihat Data <br>Mahasiswa</span>
+                </a>
+                <span class="tooltip">Lihat Data Mahasiswa</span>
             </li>
 
             <li>

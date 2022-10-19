@@ -5,7 +5,6 @@ session_start();
 if (!isset($_SESSION['nip'])){ 
     header ("Location:../login.php");
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -65,7 +64,7 @@ if (!isset($_SESSION['nip'])){
                 <span class="tooltip">Lihat Data Mahasiswa</span>
             </li>
             <li>
-            <a href="../logout.php">
+                <a href="../logout.php">
                     <i class='bx bx-log-out' id="log_out"></i>
                     <span class="links_name">Keluar</span>
                 </a>
@@ -76,50 +75,30 @@ if (!isset($_SESSION['nip'])){
 
     <form method="POST" autocomplete="on">
         <section class="home-section">
+            <div class="container">
+                <h1 id="header">VERIFIKASI BERKAS MAHASISWA </h1>
+                <div class="row mt-5 gx-5 justify-content-center">
 
-            <div class="d-flex justify-content-center" id="searchmhs">
-                <h3>Rekap Data Mahasiswa</h3>
-                <input class="form-control" type="text" name="nama_mhs" placeholder="Nama Mahasiswa" value=""
-                    id="nama_mhs" />
-                <input type="submit" class="btn btn-class mt-4" name="cari_mhs" value="Cari" />
-            </div>
-            
-            <div id="datamhs">
-            <h4>Mahasiswa Perwalian</h4>
-                <div class="d-flex justify-content-center">
-                    <table id="tabelmhs">
-                        <tr>
-                            <th id="table1">NO. </th>
-                            <th id="table1">NAMA </th>
-                            <th id="table1">NIM </th>
-                            <th id="table2">AKSI </th>
-                        </tr>
-                        <?php 
-                    $query = "SELECT * FROM tb_mhs";
-                    $connect = mysqli_query($conn, $query);
-                    $no = 1;
+                    <div class="col-md-6 justify-content-center" id="showstats" onclick="location.href='verifIRS.php'">
+                        <h1 id="div_title"> IRS <h1>
+                    </div>
 
-                    if (isset($_POST['cari_mhs'])){
-                        $nama_mhs = $_POST['nama_mhs'];
-                        $query = "SELECT * FROM tb_mhs where nama like '%".$nama_mhs."%'";
-                        $connect = mysqli_query($conn, $query);
-                        $no = 1;
-                    }
-                    
-                    while ($data = $connect->fetch_object()) {
-                        echo '<tr>';
-                        echo '<td id="table1">'.$no.'</td>';
-                        echo '<td id="table1">'.$data->nama.'</td>';
-                        echo '<td id="table1">'.$data->nim.'</td>';
-                        ?><td id="table2"><button type="button" class="btn btn-primary"
-                                onclick="location.href = 'lihatMhs.php?nim=<?php echo $data->nim ?>'">Lihat
-                                Mahasiswa</button></td>
-                        <?php echo '</tr>';
-                        $no = $no+1;
-                    }
-                
-                  ?>
-                    </table>
+                    <div class="col-md-6 justify-content-center" id="showstats" onclick="location.href='verifKHS.php'">
+                        <h1 id="div_title"> KHS <h1>
+                    </div>
+
+                </div>
+                <div class="row mt-5 gx-5 justify-content-center">
+
+                    <div class="col-md-6 justify-content-center" id="showstats" onclick="location.href='verifPKL.php'">
+                        <h1 id="div_title"> PKL <h1>
+                    </div>
+
+                    <div class="col-md-6 justify-content-center" id="showstats" onclick="location.href='verifSkripsi.php'">
+                        <h1 id="div_title"> SKRIPSI <h1>
+                    </div>
+
+
                 </div>
             </div>
 

@@ -13,6 +13,14 @@ body {
     width: 28%;
     margin-left: 2em;
     margin-right: 2em;
+    box-shadow: 10px 10px 30px grey;
+    transition: all 0.4s;
+}
+
+#showstats:hover{
+    background-color: rgb(103, 27, 161);
+    color: white;
+    box-shadow: 20px 10px 30px rgb(174, 127, 183);
 }
 
 #profilepic {
@@ -67,6 +75,7 @@ h3{
     margin-right: 5em;
     margin-bottom: 3em;
     border-radius: 20px;
+    box-shadow: 10px 10px 30px grey;
 }
 
 #stat {
@@ -107,7 +116,17 @@ h3{
     text-align: center;
 }
 
+td{
+    padding-top: 1em;
+}
+
 #table2 {
     padding-left: 6em;
     text-align: center;
 }
+
+#header {
+    text-align: center;
+    font-weight: bold;
+}
+

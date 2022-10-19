@@ -5,7 +5,6 @@ session_start();
 if (!isset($_SESSION['nip'])){ 
     header ("Location:../login.php");
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -65,7 +64,7 @@ if (!isset($_SESSION['nip'])){
                 <span class="tooltip">Lihat Data Mahasiswa</span>
             </li>
             <li>
-            <a href="../logout.php">
+                <a href="../logout.php">
                     <i class='bx bx-log-out' id="log_out"></i>
                     <span class="links_name">Keluar</span>
                 </a>
@@ -74,58 +73,83 @@ if (!isset($_SESSION['nip'])){
         </ul>
     </div>
 
-    <form method="POST" autocomplete="on">
+    <form method="GET" autocomplete="on">
         <section class="home-section">
-
             <div class="d-flex justify-content-center" id="searchmhs">
-                <h3>Rekap Data Mahasiswa</h3>
+                <h3 id="header">Verifikasi KHS Mahasiswa</h3>
                 <input class="form-control" type="text" name="nama_mhs" placeholder="Nama Mahasiswa" value=""
                     id="nama_mhs" />
                 <input type="submit" class="btn btn-class mt-4" name="cari_mhs" value="Cari" />
             </div>
-            
+
             <div id="datamhs">
-            <h4>Mahasiswa Perwalian</h4>
+                <h4>Mahasiswa Perwalian</h4>
                 <div class="d-flex justify-content-center">
                     <table id="tabelmhs">
                         <tr>
                             <th id="table1">NO. </th>
                             <th id="table1">NAMA </th>
                             <th id="table1">NIM </th>
-                            <th id="table2">AKSI </th>
+                            <th id="table1">SEMESTER </th>
+                            <th id="table1">SKS </th>
+                            <th id="table1">SKS KUMULATIF</th>
+                            <th id="table1">IP SEMESTER</th>
+                            <th id="table1">IP KUMULATIF</th>
+                            <th id="table1">SCAN KHS </th>
+                            <th id="table2">VERIFIKASI </th>
                         </tr>
                         <?php 
-                    $query = "SELECT * FROM tb_mhs";
-                    $connect = mysqli_query($conn, $query);
-                    $no = 1;
 
-                    if (isset($_POST['cari_mhs'])){
-                        $nama_mhs = $_POST['nama_mhs'];
-                        $query = "SELECT * FROM tb_mhs where nama like '%".$nama_mhs."%'";
+                        $query = "SELECT * FROM tb_khs JOIN tb_mhs where tb_khs.nim = tb_mhs.nim ORDER BY tb_khs.verif_khs,tb_khs.semester";
                         $connect = mysqli_query($conn, $query);
                         $no = 1;
-                    }
+
+                        if (isset($_GET['cari_mhs'])){
+                            $nama_mhs = $_GET['nama_mhs'];
+                            $query = "SELECT * FROM tb_khs JOIN tb_mhs where tb_khs.nim = tb_mhs.nim && tb_mhs.nama LIKE '%".$nama_mhs."%' ORDER BY tb_khs.verif_khs,tb_khs.semester";
+                            $connect = mysqli_query($conn, $query);
+                            $no = 1;
+                        }
+                        
                     
                     while ($data = $connect->fetch_object()) {
-                        echo '<tr>';
+                        $st_verif = $data->verif_khs;
+                        if ($st_verif == "belum"){
+                            $selectstatus1 = "selected = true";
+                            $selectstatus2 = "";
+                        }
+                        elseif ($st_verif == "sudah"){
+                                $selectstatus1 = "";
+                                $selectstatus2 = "selected = true";
+                        }
+                        echo '<tr id ="rows">';
                         echo '<td id="table1">'.$no.'</td>';
                         echo '<td id="table1">'.$data->nama.'</td>';
                         echo '<td id="table1">'.$data->nim.'</td>';
-                        ?><td id="table2"><button type="button" class="btn btn-primary"
-                                onclick="location.href = 'lihatMhs.php?nim=<?php echo $data->nim ?>'">Lihat
-                                Mahasiswa</button></td>
+                        echo '<td id="table1">'.$data->semester.'</td>';
+                        echo '<td id="table1">'.$data->sks.'</td>';
+                        echo '<td id="table1">'.$data->sks_kumulatif.'</td>';
+                        echo '<td id="table1">'.$data->ip_semester.'</td>';
+                        echo '<td id="table1">'.$data->ip_kumulatif.'</td>';
+                        ?>
+                        <td id="table1"><button type="button" class="btn btn-primary"
+                                onclick="location.href = 'scanKHS.php?nim=<?php echo $data->nim ?>'">Lihat
+                                Scan KHS</button></td>
+                        <?php echo '
+                         <td>
+                            <select id="'.$data->nim.'" name="verif_khs" class="form-control" onchange="changeKHS('.$data->nim.')">
+                                <option value="belum"'.$selectstatus1.'>Belum</option>
+                                <option value="sudah"'.$selectstatus2.'>Sudah</option>
+                            </select>
+                        </td>'; ?>
                         <?php echo '</tr>';
                         $no = $no+1;
                     }
-                
                   ?>
                     </table>
                 </div>
             </div>
-
         </section>
     </form>
+    <p id="db_status"></p>
     <script src="../library/js/script.js"> </script>
-</body>
-
-</html>
