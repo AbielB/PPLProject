@@ -48,3 +48,61 @@ link.addEventListener("click", e => {
  forms.classList.toggle("show-signup");
 })
 })
+
+
+
+//-----------------------AJAX---------------------
+function getXMLHTTPRequest() {
+  if (window.XMLHttpRequest) {
+      return new XMLHttpRequest();
+  } else {
+      return new ActiveXObject("Microsoft.XMLHTTP");
+  }
+}
+
+function changePKL(nim) {
+  console.log("clicked")
+  var xmlhttp = getXMLHTTPRequest()
+  var status = document.getElementById(nim).value;
+  var url = "getPKL.php?nim=" + nim + "&status=" + status;
+  xmlhttp.open('GET', url, true);
+  xmlhttp.onreadystatechange = function() {
+      if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+          document.getElementById("db_status").innerHTML = xmlhttp.responseText;
+      }
+      return false;
+  }
+  xmlhttp.send(null);
+}
+
+function changeKHS(nim) {
+  console.log("clicked")
+  var xmlhttp = getXMLHTTPRequest()
+  var status = document.getElementById(nim).value;
+  var url = "getKHS.php?nim=" + nim + "&status=" + status;
+  xmlhttp.open('GET', url, true);
+  xmlhttp.onreadystatechange = function() {
+      if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+          document.getElementById("db_status").innerHTML = xmlhttp.responseText;
+      }
+      return false;
+  }
+  xmlhttp.send(null);
+}
+
+function changeSkripsi(nim) {
+  console.log("clicked")
+  var xmlhttp = getXMLHTTPRequest()
+  var status = document.getElementById(nim).value;
+  var url = "getSkripsi.php?nim=" + nim + "&status=" + status;
+  xmlhttp.open('GET', url, true);
+  xmlhttp.onreadystatechange = function() {
+      if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+          document.getElementById("db_status").innerHTML = xmlhttp.responseText;
+      }
+      return false;
+  }
+  xmlhttp.send(null);
+}
+
+//-----------------------END AJAX------------------
