@@ -76,7 +76,7 @@ if (!isset($_SESSION['nip'])){
     <form method="GET" autocomplete="on">
         <section class="home-section">
             <div class="d-flex justify-content-center" id="searchmhs">
-                <h3 id="header">Verifikasi PKL Mahasiswa</h3>
+                <h3 id="header">Verifikasi Skripsi Mahasiswa</h3>
                 <input class="form-control" type="text" name="nama_mhs" placeholder="Nama Mahasiswa" value=""
                     id="nama_mhs" />
                 <input type="submit" class="btn btn-class mt-4" name="cari_mhs" value="Cari" />
@@ -111,7 +111,7 @@ if (!isset($_SESSION['nip'])){
                         
                     
                     while ($data = $connect->fetch_object()) {
-                        $st_verif = $data->verif_pkl;
+                        $st_verif = $data->verif_skripsi;
                         if ($st_verif == "belum"){
                             $selectstatus1 = "selected = true";
                             $selectstatus2 = "";
